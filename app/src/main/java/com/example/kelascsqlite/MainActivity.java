@@ -19,10 +19,11 @@ import java.util.HashMap;
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private TemanAdapter adapter;
-    private ArrayList<Teman> temenArrayList;
+    private ArrayList<Teman> temanArrayList;
     DBController controller = new DBController(this);
-    String id,nm,al,tlp;
+    String id,nm,tlp;
     private FloatingActionButton fab;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,8 +32,9 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
         fab = findViewById(R.id.floatingBtn);
+
         BacaData();
-        adapter = new TemanAdapter(temenArrayList);
+        adapter = new TemanAdapter(temanArrayList);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this);
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
@@ -48,16 +50,16 @@ public class MainActivity extends AppCompatActivity {
 
     public void BacaData(){
         ArrayList<HashMap<String,String>> daftarTeman = controller.getAllTeman();
-        temenArrayList = new ArrayList<>();
-        //memindah dari hasil query ke dalam Teman
-        for (int i=0;i<daftarTeman.size();i++) {
+        temanArrayList = new ArrayList<>();
+        //memindah dari hasil query kedalam teman
+        for (int i=0;i<daftarTeman.size();i++){
             Teman teman = new Teman();
 
             teman.setId(daftarTeman.get(i).get("id").toString());
             teman.setNama(daftarTeman.get(i).get("nama").toString());
-            teman.setAlamat(daftarTeman.get(i).get("alamat").toString());
             teman.setTelpon(daftarTeman.get(i).get("telpon").toString());
-            temenArrayList.add(teman);
+            //pindahkan dari Teman kedalam ArrayList teman di adapter
+            temanArrayList.add(teman);
         }
     }
 }

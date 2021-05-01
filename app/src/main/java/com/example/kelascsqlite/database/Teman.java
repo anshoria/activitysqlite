@@ -3,17 +3,15 @@ package com.example.kelascsqlite.database;
 public class Teman {
     String id;
     String nama;
-    String alamat;
     String telpon;
 
-    public Teman(String id, String nama, String alamat, String telpon) {
-        this.id = id;
-        this.nama = nama;
-        this.alamat = alamat;
-        this.telpon = telpon;
+    public Teman() {
     }
 
-    public Teman() {
+    public Teman(String id, String nama, String telpon) {
+        this.id = id;
+        this.nama = nama;
+        this.telpon = telpon;
     }
 
     public String getId() {
@@ -30,14 +28,6 @@ public class Teman {
 
     public void setNama(String nama) {
         this.nama = nama;
-    }
-
-    public String getAlamat() {
-        return alamat;
-    }
-
-    public void setAlamat(String alamat) {
-        this.alamat = alamat;
     }
 
     public String getTelpon() {

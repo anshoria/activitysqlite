@@ -1,62 +1,77 @@
 package com.example.kelascsqlite.adapter;
 
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.view.menu.MenuView;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kelascsqlite.R;
 import com.example.kelascsqlite.database.Teman;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 public class TemanAdapter extends RecyclerView.Adapter<TemanAdapter.TemanViewHolder> {
-    private ArrayList<Teman> listData;
+    private ArrayList<Teman> listdata;
 
-    public TemanAdapter(ArrayList<Teman> listData) {
-        this.listData = listData;
+    public TemanAdapter(ArrayList<Teman> listdata) {
+        this.listdata = listdata;
     }
 
     @Override
     public TemanViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInf = LayoutInflater.from(parent.getContext());
-        View view = layoutInf.inflate(R.layout.row_data_teman,parent, false);
+        View view = layoutInf.inflate(R.layout.row_data_teman,parent,false);
         return new TemanViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull TemanViewHolder holder, int position) {
-        String nm,al,tlp;
+        String nm,tlp;
 
-        nm = listData.get(position).getNama();
-        al = listData.get(position).getAlamat();
-        tlp = listData.get(position).getTelpon();
+        nm = listdata.get(position).getNama();
+        tlp = listdata.get(position).getTelpon();
 
+        holder.namaTxt.setTextColor(Color.BLUE);
+        holder.namaTxt.setTextSize(20);
         holder.namaTxt.setText(nm);
-        holder.alamatTxt.setText(al);
         holder.telponTxt.setText(tlp);
     }
 
-
     @Override
     public int getItemCount() {
-        return (listData != null)?listData.size() : 0;
+        return (listdata != null)?listdata.size() : 0;
     }
 
     public class TemanViewHolder extends RecyclerView.ViewHolder {
         private CardView cardku;
-        private TextView namaTxt,alamatTxt,telponTxt;
+        private TextView namaTxt,telponTxt;
         public TemanViewHolder(View view) {
             super(view);
             cardku = (CardView) view.findViewById(R.id.kartuku);
             namaTxt = (TextView) view.findViewById(R.id.textNama);
             telponTxt = (TextView) view.findViewById(R.id.textTelpon);
+
+            cardku.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    return false;
+                }
+            });
         }
+
     }
+
 }
